@@ -1,0 +1,21 @@
+﻿@page
+@model examen_daw.Pages.StergereModel
+@{
+}
+
+
+<script>
+
+    var userConfirmare = confirm("Doriți să ștergeți filmul?");
+    if (userConfirmare) {
+
+        var currentUrl = window.location.href;
+        var returnUrl = currentUrl + "&userConfirmare=true";
+        fetch(returnUrl)
+
+    } else {
+        window.location.href = "index";
+    }
+</script>
+
+<h2 style="text-align: center; font-family: Arial, Helvetica, sans-serif">Filmul a fost șters cu succes.</h2>

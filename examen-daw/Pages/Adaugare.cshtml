@@ -1,0 +1,33 @@
+﻿@page
+@using examen_daw.Models
+@model examen_daw.Pages.AdaugareModel
+@{
+}
+
+<div class="container mt-5">
+    <h2>Adaugă un film nou</h2>
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="@Model.Film.Titlu" class="font-weight-bold">Titlu</label>
+            <input class="form-control" asp-for="@Model.Film.Titlu" />
+            <span asp-validation-for="@Model.Film.Titlu" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Film.An" class="font-weight-bold">An</label>
+            <input class="form-control" asp-for="@Model.Film.An" />
+            <span asp-validation-for="@Model.Film.An" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Film.Gen" class="font-weight-bold">Gen</label>
+            <input class="form-control" asp-for="@Model.Film.Gen" />
+            <span asp-validation-for="@Model.Film.Gen" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-secondary">Adaugă</button>
+
+    </form>
+
+</div>
+

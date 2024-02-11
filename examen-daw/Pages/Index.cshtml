@@ -1,0 +1,67 @@
+﻿@page
+@using examen_daw.Models
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="my-4">
+    <a asp-page="/Adaugare" class="btn btn-secondary">Adaugă film</a>
+</div>
+
+<div class="my-4">
+    <form method="get" class="form-inline">
+        <div class="form-group mb-2">
+            <label for="anCautare">Cauta film dupa an</label>
+            <input type="number" id="anCautare" name="anCautare" class="form-control" value="@Model.AnCautare" />
+        </div>
+        <button type="submit" class="btn btn-secondary mb-2 ml-2">Caută</button>
+    </form>
+</div>
+
+
+@if(Model.Filme.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover ">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Titlu</th>
+                    <th>An</th>
+                    <th>Gen</th>
+                    <th>Recenzie Medie</th>
+                    <th>Acțiune</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var film in Model.Filme)
+                {
+                    <tr>
+                        <td>@film.Titlu</td>
+                        <td>@film.An</td>
+                        <td>@film.Gen</td>
+                        <td>
+                            @if (film.Recenzii != null && film.Recenzii.Any())
+                            {
+                                @film.Recenzii.Average(r => r.Rating).ToString("0.##")
+                            }
+                            else
+                            {
+                                @:N/A
+                            }
+                        </td>
+                        <td>
+                            <a asp-page="/Editare" asp-route-id="@film.Filmid" class="btn btn-success"><i class="fa-regular fa-pen-to-square"></i></a>
+                            <a asp-page="/Stergere" asp-route-id="@film.Filmid" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+}
+else
+{
+    <div class="alert alertalert-warning" role="alert">Nu s-au gasit filme pentru anul specificat.</div>
+}
